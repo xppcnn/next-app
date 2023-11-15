@@ -1,11 +1,13 @@
 "use client";
 import React from "react";
-import { Button } from "@nextui-org/button";
+import { Button } from "@/components/ui/button";
 
 const AddToCart = () => {
   return (
     <div>
-      <Button onClick={() => console.log("click")} color="primary">add to cart</Button>
+      <Button onClick={() => console.log("click")} color="primary">
+        add to cart
+      </Button>
     </div>
   );
 };
