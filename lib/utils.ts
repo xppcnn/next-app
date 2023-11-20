@@ -2,6 +2,7 @@ import { type ClassValue, clsx } from "clsx";
 import { NextResponse } from "next/server";
 import { twMerge } from "tailwind-merge";
 import { format } from "date-fns";
+import { zhCN } from "date-fns/locale";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -28,5 +29,5 @@ export function ResponseOK<T>(data: T, message = "success", code = 200) {
 }
 
 export function DateFormat(time: Date, formatText = "yyyy-MM-dd HH:mm:ss") {
-  return format(new Date(time), formatText);
+  return format(new Date(time), formatText, { locale: zhCN });
 }
