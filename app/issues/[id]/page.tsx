@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { DateFormat } from "@/lib/utils";
+import { formatDateToLocal } from "@/lib/utils";
 import prisma from "@/prisma/client";
 import { IDParams } from "@/types";
 import { notFound } from "next/navigation";
@@ -22,7 +22,7 @@ const IssueDetailPage = async ({ params }: IDParams) => {
       </h2>
       <div className="flex gap-2">
         <IssueStatusBadge status={detail.status} />
-        <div>{DateFormat(detail.createTime)}</div>
+        <div>{formatDateToLocal(detail.createTime)}</div>
       </div>
       <Card className="mt-2">
         <CardContent>
