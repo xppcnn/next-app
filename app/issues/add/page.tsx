@@ -13,11 +13,23 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 import { formSchema } from "@/app/api/issues/schema";
 import { z } from "zod";
 import Spinner from "@/components/ui/spinner";
+import dynamic from "next/dynamic";
+
+interface ComponentProps {
+  forwardedRef: React.ForwardedRef<any>;
+}
+
+const Component = dynamic(() => import("react-simplemde-editor"), {
+  ssr: false,
+  loading: () => <p>Loading...</p>,
+});
+
+const SimpleMDE = React.forwardRef((props, ref) => <Component {...props} />);
+SimpleMDE.displayName = "SimpleMDE";
 
 type IssueForm = z.infer<typeof formSchema>;
 
