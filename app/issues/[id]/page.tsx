@@ -5,6 +5,9 @@ import { IDParams } from "@/types";
 import { notFound } from "next/navigation";
 import ReactMarkDown from "react-markdown";
 import IssueStatusBadge from "../IssueStatusBadge";
+import { Button } from "@/components/ui/button";
+import { CiEdit } from "react-icons/ci";
+import Link from "next/link";
 const IssueDetailPage = async ({ params }: IDParams) => {
   const detail = await prisma.issue.findUnique({
     where: {
@@ -29,6 +32,12 @@ const IssueDetailPage = async ({ params }: IDParams) => {
           <ReactMarkDown className="prose">{detail.description}</ReactMarkDown>
         </CardContent>
       </Card>
+      <Button className="mt-2" asChild>
+        <Link href={`/issues/${detail.id}/edit`}>
+          <CiEdit className="mr-2" />
+          Edit
+        </Link>
+      </Button>
     </div>
   );
 };
