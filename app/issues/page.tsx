@@ -11,9 +11,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import prisma from "@/prisma/client";
-import { DateFormat } from "@/lib/utils";
+import { formatDateToLocal } from "@/lib/utils";
 import IssueStatusBadge from "./IssueStatusBadge";
-import delay from "delay";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -21,8 +20,6 @@ export const dynamic = "force-dynamic";
 
 const Issues = async () => {
   const issues = await prisma.issue.findMany();
-  console.log("🚀 ~ file: page.tsx:23 ~ Issues ~ issues:", issues);
-  delay(2000);
   return (
     <div>
       <AddIssue></AddIssue>
@@ -45,7 +42,7 @@ const Issues = async () => {
               <TableCell className="w-[100px]">
                 <IssueStatusBadge status={issue.status} />
               </TableCell>
-              <TableCell>{DateFormat(issue.createTime)}</TableCell>
+              <TableCell>{formatDateToLocal(issue.createTime)}</TableCell>
             </TableRow>
           ))}
         </TableBody>
