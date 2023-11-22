@@ -32,3 +32,20 @@ export async function PUT(request: NextRequest, { params }: IDParams) {
   });
   return ResponseOK(newIssue);
 }
+
+export async function DELETE(request: NextRequest, { params }: IDParams) {
+  const issue = await prisma.issue.findUnique({
+    where: {
+      id: params.id,
+    },
+  });
+  if (!issue) {
+    return BadRequest("the issue not exist");
+  }
+  await prisma.issue.delete({
+    where: {
+      id: params.id,
+    },
+  });
+  return ResponseOK(null);
+}
