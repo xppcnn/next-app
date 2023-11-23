@@ -3,3 +3,8 @@ export interface IDParams {
     id: string;
   };
 }
+
+export interface IActionState {
+  success?: boolean;
+  error?: any;
+}

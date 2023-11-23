@@ -19,6 +19,7 @@ import { z } from "zod";
 import Spinner from "@/components/ui/spinner";
 import { Issue } from "@prisma/client";
 import SimpleMDE from "react-simplemde-editor";
+import { useSession } from "next-auth/react";
 
 type IssueFormData = z.infer<typeof formSchema>;
 
@@ -26,6 +27,8 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
   const form = useForm<IssueFormData>({
     resolver: zodResolver(formSchema),
   });
+  const { data: session, update } = useSession();
+  console.log("🚀 ~ file: IssueForm.tsx:31 ~ IssueForm ~ session:", session);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const onSubmit = async (params: IssueFormData) => {

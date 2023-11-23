@@ -30,6 +30,17 @@ export function ResponseOK<T>(data: T, message = "success", code = 200) {
   );
 }
 
+export function ResponseError<T>(data: T, message = "fail", code = 201) {
+  return NextResponse.json(
+    {
+      code,
+      message,
+      data,
+    },
+    { status: 200 }
+  );
+}
+
 export function DateFormat(time: Date, formatText = "yyyy-MM-dd HH:mm:ss") {
   return format(new Date(time), formatText, { locale: zhCN });
 }
