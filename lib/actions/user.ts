@@ -85,9 +85,9 @@ export async function signInByEmail(
     });
     return res;
   } catch (error) {
-    // return {
-    //   success: false,
-    //   error: (error as Error).toString(),
-    // };
+    return {
+      success: false,
+      error: (error as Error).toString(),
+    };
   }
 }
