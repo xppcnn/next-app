@@ -1,8 +1,13 @@
 import Link from "next/link";
 import React from "react";
+import EmailLogin from "./EmailLogin";
 
 const Login = () => {
-  return <Link href="/register">Register</Link>;
+  return (
+    <div className="bg-white h-full">
+      <EmailLogin />
+    </div>
+  );
 };
 
 export default Login;

@@ -19,7 +19,11 @@ export function BadRequest(msg: any) {
   );
 }
 
-export function ResponseOK<T>(data: T, message = "success", code = 200) {
+export function ResponseOK<T>(
+  data: T,
+  message = "success",
+  code = 200
+): NextResponse<{ code: number; message: string; data: T }> {
   return NextResponse.json(
     {
       code,
@@ -30,7 +34,11 @@ export function ResponseOK<T>(data: T, message = "success", code = 200) {
   );
 }
 
-export function ResponseError<T>(data: T, message = "fail", code = 201) {
+export function ResponseError<T>(
+  data: T,
+  message = "fail",
+  code = 201
+): NextResponse<{ code: number; message: string; data: T }> {
   return NextResponse.json(
     {
       code,

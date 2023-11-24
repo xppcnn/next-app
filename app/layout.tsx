@@ -15,20 +15,20 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth();
-  if (session?.user)
-    session.user = {
-      name: session.user.name,
-      email: session.user.email,
-      id: session.user.id,
-    };
+  // const session = await auth();
+  // if (session?.user)
+  //   session.user = {
+  //     name: session.user.name,
+  //     email: session.user.email,
+  //     id: session.user.id,
+  //   };
   return (
     <html lang="en" className="light">
       <body>
-        <AuthProvider session={session}>
+        <AuthProvider>
           <Providers>
             <NavBar />
-            <main className="p-5">{children}</main>
+            <main className="p-5 main-height">{children}</main>
           </Providers>
         </AuthProvider>
       </body>

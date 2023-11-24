@@ -14,7 +14,6 @@ export async function POST(request: NextRequest) {
       email: body.email,
     },
   });
-  console.log("🚀 ~ file: route.ts:17 ~ POST ~ user:", user);
   if (!user) {
     return ResponseError(null, "该用户不存在");
   }

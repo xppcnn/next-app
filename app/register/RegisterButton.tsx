@@ -6,7 +6,7 @@ export default function RegisterButton() {
   const { pending } = useFormStatus();
   return (
     <Button className="mt-4 w-full" disabled={pending} type="submit">
-      Log Up
+      注册
     </Button>
   );
 }

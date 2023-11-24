@@ -4,6 +4,7 @@ import { IActionState } from "@/types";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { signIn } from "@/auth";
 
 const RegisterSchema = z.object({
   name: z.string().min(3, "用户名不得少于3个字符"),
@@ -11,7 +12,13 @@ const RegisterSchema = z.object({
   password: z.string().min(8, "密码不得少于8个字符"),
 });
 
+const LoginSchema = z.object({
+  email: z.string().email("请输入正确邮箱格式"),
+  password: z.string().min(8, "密码不得少于8个字符"),
+});
+
 type RegisterForm = z.infer<typeof RegisterSchema>;
+type LoginForm = z.infer<typeof LoginSchema>;
 
 export async function register(prevState: IActionState, formData: FormData) {
   try {
@@ -55,5 +62,32 @@ export async function register(prevState: IActionState, formData: FormData) {
       };
     }
     throw error;
+  }
+}
+
+export async function signInByEmail(
+  prevState: IActionState,
+  formData: FormData
+) {
+  try {
+    const obj = Object.fromEntries(formData.entries()) as LoginForm;
+    const validation = LoginSchema.safeParse(obj);
+    if (!validation.success) {
+      return {
+        success: false,
+        error: validation.error.flatten().fieldErrors,
+      };
+    }
+    const res = await signIn("credentials", {
+      redirectTo: "/",
+      email: formData.get("email"),
+      password: formData.get("password"),
+    });
+    return res;
+  } catch (error) {
+    // return {
+    //   success: false,
+    //   error: (error as Error).toString(),
+    // };
   }
 }
