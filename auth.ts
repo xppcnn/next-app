@@ -33,7 +33,6 @@ export const authConfig = {
         password: { label: "Password", type: "password" },
         email: { label: "Email", type: "email" },
       },
-      
       async authorize(credentials) {
         const userCredentials = {
           email: credentials.email,

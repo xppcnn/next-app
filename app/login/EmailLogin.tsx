@@ -2,17 +2,15 @@
 import { Button } from "@/components/ui/button";
 import Spinner from "@/components/ui/spinner";
 import { FaGithub } from "react-icons/fa";
-import { signInByEmail } from "@/lib/actions/user";
+import { authenticate, signInByEmail } from "@/lib/actions/user";
 import { IActionState } from "@/types";
 import Link from "next/link";
 import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
-import { signIn } from "@/auth";
+import { signIn } from "next-auth/react";
+
 const EmailLogin = () => {
-  const [formState, action] = useFormState<IActionState, FormData>(
-    signInByEmail,
-    {}
-  );
+  const [formState, action] = useFormState(authenticate, undefined);
   const { pending } = useFormStatus();
   return (
     <div className="w-[500px]  m-auto   px-6">
@@ -37,7 +35,7 @@ const EmailLogin = () => {
                   required
                 />
               </div>
-              {formState?.error?.email ? (
+              {/* {formState?.error?.email ? (
                 <div
                   id="email-error"
                   aria-live="polite"
@@ -47,7 +45,7 @@ const EmailLogin = () => {
                     <p key={error}>{error}</p>
                   ))}
                 </div>
-              ) : null}
+              ) : null} */}
             </div>
             <div className="mt-4">
               <label
@@ -65,7 +63,7 @@ const EmailLogin = () => {
                   placeholder="请输入密码"
                 />
               </div>
-              {formState?.error?.password ? (
+              {/* {formState?.error?.password ? (
                 <div
                   id="password-error"
                   aria-live="polite"
@@ -75,7 +73,7 @@ const EmailLogin = () => {
                     <p key={error}>{error}</p>
                   ))}
                 </div>
-              ) : null}
+              ) : null} */}
             </div>
           </div>
         </div>
@@ -104,7 +102,7 @@ const EmailLogin = () => {
         type="button"
         disabled={pending}
         className="flex justify-center items-center w-full"
-        onClick={() => signIn("github")}
+        onClick={() => signIn("github",{callbackUrl:`${process.env.NEXTAUTH_URL}/dashboard`})}
       >
         {pending ? (
           <Spinner className="mr-2" />

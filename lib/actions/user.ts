@@ -79,15 +79,41 @@ export async function signInByEmail(
       };
     }
     const res = await signIn("credentials", {
-      redirectTo: "/",
+      callbackUrl: "http://localhost:8866/dashboard",
+      // redirect: true,
       email: formData.get("email"),
       password: formData.get("password"),
     });
-    return res;
+    if (res) {
+      return res;
+    }
+    return {
+      success: false,
+      error: "",
+    };
   } catch (error) {
     return {
       success: false,
       error: (error as Error).toString(),
     };
+  }
+}
+
+export async function authenticate(
+  prevState: string | undefined,
+  formData: FormData
+) {
+  const obj = Object.fromEntries(formData.entries()) as LoginForm;
+  const validation = LoginSchema.safeParse(obj);
+  if (!validation.success) {
+    return '校验错误';
+  }
+  try {
+    await signIn("credentials", Object.fromEntries(formData));
+  } catch (error) {
+    if ((error as Error).message.includes("CredentialsSignin")) {
+      return "CredentialSignin";
+    }
+    throw error;
   }
 }
