@@ -102,7 +102,7 @@ const EmailLogin = () => {
         type="button"
         disabled={pending}
         className="flex justify-center items-center w-full"
-        onClick={() => signIn("github",{callbackUrl:`${process.env.NEXTAUTH_URL}/dashboard`})}
+        onClick={() => signIn("github")}
       >
         {pending ? (
           <Spinner className="mr-2" />
