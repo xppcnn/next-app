@@ -6,9 +6,9 @@ export const authConfig = {
   },
   providers: [],
   callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
-      console.log("🚀 ~ file: auth.config.ts:10 ~ authorized ~ auth:", auth)
+    authorized({ auth, request: { nextUrl, url } }) {
       const isLoggedIn = !!auth?.user;
+      return isLoggedIn
       const isOnDashboard = nextUrl.pathname.startsWith("/dashboard");
       if (isOnDashboard) {
         if (isLoggedIn) return true;
