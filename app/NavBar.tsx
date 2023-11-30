@@ -1,10 +1,12 @@
 "use client";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { redirect, usePathname } from "next/navigation";
 import React from "react";
 import { WiAlien } from "react-icons/wi";
+import { UserNav } from "./UserNav";
 
 const navItems = [
   {
@@ -18,7 +20,8 @@ const navItems = [
 ];
 const NavBar = () => {
   const currPath = usePathname();
-  const { status } = useSession();
+  const { status, data } = useSession();
+  console.log("🚀 ~ file: NavBar.tsx:24 ~ NavBar ~ data:", data);
   if (currPath == "/") {
     redirect("/dashboard");
   }
@@ -43,14 +46,8 @@ const NavBar = () => {
           ))}
         </ul>
       </div>
-      {status === "authenticated" && (
-        <Link
-          href="/api/auth/signout"
-          className="text-base font-medium text-zinc-500 transition-colors hover:text-primary"
-        >
-          Log Out
-        </Link>
-      )}
+      {status === "loading" && <Skeleton className="h-12 w-12 rounded-full" />}
+      {status === "authenticated" && <UserNav userInfo={data.user} />}
       {status === "unauthenticated" && (
         <Link
           href="/api/auth/signin"

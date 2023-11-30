@@ -28,7 +28,6 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
     resolver: zodResolver(formSchema),
   });
   const { data: session, update } = useSession();
-  console.log("🚀 ~ file: IssueForm.tsx:31 ~ IssueForm ~ session:", session);
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const onSubmit = async (params: IssueFormData) => {

@@ -24,5 +24,6 @@ export async function POST(request: NextRequest) {
     name: user.name,
     email: user.email,
     id: user.id,
+    image: user.image,
   });
 }
