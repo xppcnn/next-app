@@ -109,13 +109,11 @@ export async function authenticate(
     return '校验错误';
   }
   try {
-    const aa = await signIn("credentials", {
+    await signIn("credentials", {
       ...Object.fromEntries(formData),
       redirect: true,
       redirectTo: '/dashboard'
     });
-    redirect(aa)
-    console.log("🚀 ~ file: user.ts:117 ~ aa:", aa)
   } catch (error) {
     if ((error as Error).message.includes("CredentialsSignin")) {
       return "CredentialSignin";

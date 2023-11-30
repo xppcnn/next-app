@@ -102,7 +102,9 @@ const EmailLogin = () => {
         type="button"
         disabled={pending}
         className="flex justify-center items-center w-full"
-        onClick={() => signIn("github")}
+        onClick={() =>
+          signIn("github", { redirect: true, redirectTo: "/dashboard" })
+        }
       >
         {pending ? (
           <Spinner className="mr-2" />
