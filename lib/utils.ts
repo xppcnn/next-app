@@ -48,6 +48,16 @@ export function ResponseError<T>(
     { status: 200 }
   );
 }
+export function NotAuthorized(
+  message = "没有权限"
+): NextResponse<{ message: string }> {
+  return NextResponse.json(
+    {
+      message,
+    },
+    { status: 401 }
+  );
+}
 
 export function DateFormat(time: Date, formatText = "yyyy-MM-dd HH:mm:ss") {
   return format(new Date(time), formatText, { locale: zhCN });

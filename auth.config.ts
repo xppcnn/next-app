@@ -1,4 +1,9 @@
 import type { NextAuthConfig } from "next-auth";
+import { match } from "path-to-regexp";
+
+const permPaths = ["/issues/add", "/issues/:id/edit"];
+
+const urlMatch = match(permPaths);
 
 export const authConfig = {
   pages: {
@@ -7,16 +12,12 @@ export const authConfig = {
   providers: [],
   callbacks: {
     authorized({ auth, request: { nextUrl, url } }) {
-      const isLoggedIn = !!auth?.user;
-      return isLoggedIn
-      const isOnDashboard = nextUrl.pathname.startsWith("/dashboard");
-      if (isOnDashboard) {
-        if (isLoggedIn) return true;
-        return false; // Redirect unauthenticated users to login page
-      } else if (isLoggedIn) {
-        return Response.redirect(new URL("/dashboard", nextUrl));
+      const needLogin = urlMatch(nextUrl.pathname);
+      if (!needLogin) {
+        return true;
       }
-      return true;
+      const isLoggedIn = !!auth?.user;
+      return isLoggedIn;
     },
   },
 } as NextAuthConfig;

@@ -5,14 +5,7 @@ import Credentials from "next-auth/providers/credentials";
 import GitHub from "next-auth/providers/github";
 import { authConfig as config } from "./auth.config";
 import prisma from "./prisma/client";
-declare module "next-auth" {
-  interface Session {
-    user: {
-      id: string;
-      role?: string;
-    } & DefaultSession["user"];
-  }
-}
+
 
 export const authConfig = {
   ...config,

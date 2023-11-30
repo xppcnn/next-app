@@ -1,15 +1,19 @@
 import { NextRequest } from "next/server";
 import { formSchema } from "./schema";
-import { BadRequest, ResponseOK } from "@/lib/utils";
+import { BadRequest, NotAuthorized, ResponseOK } from "@/lib/utils";
 import prisma from "@/prisma/client";
 import { z } from "zod";
+import { auth } from "@/auth";
 type IssueForm = z.infer<typeof formSchema>;
 /**
  * add issue
  * @param request
  * @returns
  */
-export async function POST(request: NextRequest) {
+export const POST = auth(async (request) => {
+  if (!request.auth) {
+    return NotAuthorized();
+  }
   const body: IssueForm = await request.json();
   const validation = formSchema.safeParse(body);
   if (!validation.success) {
@@ -22,4 +26,4 @@ export async function POST(request: NextRequest) {
     },
   });
   return ResponseOK(newIssue);
-}
+});

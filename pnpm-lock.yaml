@@ -26,6 +26,7 @@ specifiers:
   next: 14.0.2
   next-auth: ^5.0.0-beta.3
   next-cloudinary: ^5.6.0
+  path-to-regexp: ^6.2.1
   postcss: ^8
   prisma: ^5.5.2
   react: ^18
@@ -60,6 +61,7 @@ dependencies:
   next: 14.0.2_react-dom@18.2.0+react@18.2.0
   next-auth: 5.0.0-beta.3_next@14.0.2+react@18.2.0
   next-cloudinary: 5.7.0_next@14.0.2+react@18.2.0
+  path-to-regexp: 6.2.1
   prisma: 5.6.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -2890,6 +2892,10 @@ packages:
 
   /path-parse/1.0.7:
     resolution: {integrity: sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==}
+
+  /path-to-regexp/6.2.1:
+    resolution: {integrity: sha512-JLyh7xT1kizaEvcaXOQwOc2/Yhw6KZOvPf1S8401UyLk86CU79LN3vl7ztXGm/pZ+YjoyAJ4rxmHwbkBXJX+yw==}
+    dev: false
 
   /path-type/4.0.0:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
