@@ -103,7 +103,7 @@ const EmailLogin = () => {
         disabled={pending}
         className="flex justify-center items-center w-full"
         onClick={() =>
-          signIn("github", { redirect: true, redirectTo: "/dashboard" })
+          signIn("github")
         }
       >
         {pending ? (
