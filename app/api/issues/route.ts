@@ -26,4 +26,4 @@ export const POST = auth(async (request) => {
     },
   });
   return ResponseOK(newIssue);
-});
+}) as any;
