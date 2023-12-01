@@ -1,7 +1,7 @@
 import { IDParams } from "@/types";
 import { NextRequest } from "next/server";
 import { formSchema } from "../schema";
-import { BadRequest, ResponseOK } from "@/lib/utils";
+import { BadRequest, ResponseOK } from "@http";
 import prisma from "@/prisma/client";
 import { z } from "zod";
 

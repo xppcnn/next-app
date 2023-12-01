@@ -7,3 +7,11 @@ export const formSchema = z.object({
     message: "Username must be at least 1 characters.",
   }),
 });
+
+export const assignedUserSchema = z.object({
+  assignedToUserId: z
+    .string()
+    .min(1, { message: "用户信息错误" })
+    .optional()
+    .nullable(),
+});

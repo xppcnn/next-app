@@ -29,6 +29,9 @@ model Issue {
 
   updateTime DateTime @updatedAt @map("update_time")
 
+  assignedToUserId String? @map("assigned_to_user_id")
+  assignedToUser   User?   @relation(fields: [assignedToUserId], references: [id])
+
   @@map("issue")
 }
 
@@ -63,16 +66,17 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(uuid())
-  name          String?
-  email         String?   @unique
-  password      String?
-  emailVerified DateTime?
-  image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  accounts      Account[]
-  sessions      Session[]
+  id             String    @id @default(uuid())
+  name           String?
+  email          String?   @unique
+  password       String?
+  emailVerified  DateTime?
+  image          String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  accounts       Account[]
+  sessions       Session[]
+  assignedIssues Issue[]
 
   @@map("user")
 }

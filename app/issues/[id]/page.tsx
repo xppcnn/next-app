@@ -10,6 +10,7 @@ import { CiEdit } from "react-icons/ci";
 import Link from "next/link";
 import DeleteIssueBtn from "./DeleteIssueBtn";
 import { auth } from "@/auth";
+import AssignUserSelect from "./AssignUserSelect";
 const IssueDetailPage = async ({ params }: IDParams) => {
   const session = await auth();
   const detail = await prisma.issue.findUnique({
@@ -37,6 +38,7 @@ const IssueDetailPage = async ({ params }: IDParams) => {
       </Card>
       {session && (
         <div className="mt-2 space-x-2">
+          <AssignUserSelect issue={detail} />
           <Button asChild>
             <Link href={`/issues/${detail.id}/edit`}>
               <CiEdit className="mr-2" />

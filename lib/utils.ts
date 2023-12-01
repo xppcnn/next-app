@@ -1,5 +1,5 @@
 import { type ClassValue, clsx } from "clsx";
-import { NextResponse } from "next/server";
+
 import { twMerge } from "tailwind-merge";
 import { format } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
@@ -10,54 +10,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function BadRequest(msg: any) {
-  return NextResponse.json(
-    {
-      message: msg,
-    },
-    { status: 400 }
-  );
-}
 
-export function ResponseOK<T>(
-  data: T,
-  message = "success",
-  code = 200
-): NextResponse<{ code: number; message: string; data: T }> {
-  return NextResponse.json(
-    {
-      code,
-      message,
-      data,
-    },
-    { status: 200 }
-  );
-}
-
-export function ResponseError<T>(
-  data: T,
-  message = "fail",
-  code = 201
-): NextResponse<{ code: number; message: string; data: T }> {
-  return NextResponse.json(
-    {
-      code,
-      message,
-      data,
-    },
-    { status: 200 }
-  );
-}
-export function NotAuthorized(
-  message = "没有权限"
-): NextResponse<{ message: string }> {
-  return NextResponse.json(
-    {
-      message,
-    },
-    { status: 401 }
-  );
-}
 
 export function DateFormat(time: Date, formatText = "yyyy-MM-dd HH:mm:ss") {
   return format(new Date(time), formatText, { locale: zhCN });

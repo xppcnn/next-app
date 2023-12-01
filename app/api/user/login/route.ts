@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { LoginForm, LoginSchema } from "./schema";
-import { BadRequest, ResponseError, ResponseOK } from "@/lib/utils";
+import { BadRequest, ResponseError, ResponseOK } from "@http";
 import prisma from "@/prisma/client";
 
 export async function POST(request: NextRequest) {

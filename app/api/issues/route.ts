@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { formSchema } from "./schema";
-import { BadRequest, NotAuthorized, ResponseOK } from "@/lib/utils";
+import { BadRequest, NotAuthorized, ResponseOK } from "@http";
 import prisma from "@/prisma/client";
 import { z } from "zod";
 import { auth } from "@/auth";
