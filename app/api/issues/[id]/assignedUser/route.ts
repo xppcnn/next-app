@@ -38,4 +38,4 @@ const putFn = (async (request: NextRequest, { params }: IDParams) => {
   });
   return ResponseOK(updateIssues);
 }) as authFn;
-export const PUT = auth(putFn);
+export const PUT = auth(putFn) as any;
