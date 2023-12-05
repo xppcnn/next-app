@@ -1,52 +1,35 @@
 import React from "react";
 import AddIssue from "./AddIssue";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import prisma from "@/prisma/client";
-import { formatDateToLocal } from "@/lib/utils";
-import IssueStatusBadge from "./IssueStatusBadge";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-
+import SelectIssue from "./SelectIssue";
+import { Status } from "@prisma/client";
+import { DataTable, columns } from "./Table";
 export const dynamic = "force-dynamic";
 
-const Issues = async () => {
-  const issues = await prisma.issue.findMany();
+interface Props {
+  searchParams: {
+    status: Status;
+  };
+}
+const Issues = async ({ searchParams }: Props) => {
+  const statuses = Object.values(Status);
+  const status = statuses.includes(searchParams.status)
+    ? searchParams.status
+    : undefined;
+  const issues = await prisma.issue.findMany({
+    where: {
+      status,
+    },
+  });
   return (
     <div>
-      <AddIssue></AddIssue>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Title</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>CreateTime</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {issues.map((issue) => (
-            <TableRow key={issue.id}>
-              <TableCell className="font-medium w-1/5">
-                <Link href={`/issues/${issue.id}`}>
-                  <Button variant="link">{issue.title}</Button>
-                </Link>
-              </TableCell>
-              <TableCell className="w-[100px]">
-                <IssueStatusBadge status={issue.status} />
-              </TableCell>
-              <TableCell>{formatDateToLocal(issue.createTime)}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      <div className="mb-3 flex justify-between">
+        <SelectIssue />
+        <AddIssue />
+      </div>
+      <div>
+        <DataTable columns={columns} data={issues} />
+      </div>
     </div>
   );
 };

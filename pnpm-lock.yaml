@@ -12,6 +12,7 @@ specifiers:
   '@radix-ui/react-slot': ^1.0.2
   '@tailwindcss/typography': ^0.5.10
   '@tanstack/react-query': ^5.8.4
+  '@tanstack/react-table': ^8.10.7
   '@types/node': ^20
   '@types/react': ^18
   '@types/react-dom': ^18
@@ -56,6 +57,7 @@ dependencies:
   '@radix-ui/react-select': 2.0.0_eaa2c75e371547520b6c1140f085e282
   '@radix-ui/react-slot': 1.0.2_a90a0077e94214937f3369d40733cd8f
   '@tanstack/react-query': 5.8.4_react-dom@18.2.0+react@18.2.0
+  '@tanstack/react-table': 8.10.7_react-dom@18.2.0+react@18.2.0
   class-variance-authority: 0.7.0
   clsx: 2.0.0
   date-fns: 2.30.0
@@ -1137,6 +1139,23 @@ packages:
       '@tanstack/query-core': 5.8.3
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@tanstack/react-table/8.10.7_react-dom@18.2.0+react@18.2.0:
+    resolution: {integrity: sha512-bXhjA7xsTcsW8JPTTYlUg/FuBpn8MNjiEPhkNhIGCUR6iRQM2+WEco4OBpvDeVcR9SE+bmWLzdfiY7bCbCSVuA==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      '@tanstack/table-core': 8.10.7
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@tanstack/table-core/8.10.7:
+    resolution: {integrity: sha512-KQk5OMg5OH6rmbHZxuNROvdI+hKDIUxANaHlV+dPlNN7ED3qYQ/WkpY2qlXww1SIdeMlkIhpN/2L00rof0fXFw==}
+    engines: {node: '>=12'}
     dev: false
 
   /@types/codemirror/5.60.15:
