@@ -148,7 +148,7 @@ export function DataTable({ columns, status }: DataTableProps<Issue, any>) {
       pagination,
     },
   });
-  if (isLoading) return <IssueLoading />;
+  if (isLoading) return <IssueLoading showOperation={false} />;
   return (
     <>
       <div className="rounded-md border">

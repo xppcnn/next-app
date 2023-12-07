@@ -9,11 +9,17 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
-const IssueLoading = () => {
+import SelectIssue from "./SelectIssue";
+const IssueLoading = ({ showOperation = true }: { showOperation?: boolean }) => {
   const issues = [1, 2, 3, 4, 5];
   return (
     <div>
-      <AddIssue></AddIssue>
+      {showOperation && (
+        <div className="mb-3 flex justify-between">
+          <SelectIssue />
+          <AddIssue />
+        </div>
+      )}
       <Table>
         <TableHeader>
           <TableRow>
