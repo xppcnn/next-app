@@ -28,6 +28,7 @@ import { DataTablePagination } from "@/components/custom/pagination";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { ResponseData } from "@/lib/http";
+import IssueLoading from "./loading";
 
 interface DataTableProps<TData, TValue = unknown> {
   columns: ColumnDef<TData, TValue>[];
@@ -147,7 +148,7 @@ export function DataTable({ columns, status }: DataTableProps<Issue, any>) {
       pagination,
     },
   });
-  if (isLoading) return <div>loading</div>;
+  if (isLoading) return <IssueLoading />;
   return (
     <>
       <div className="rounded-md border">
