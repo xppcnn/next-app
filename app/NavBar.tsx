@@ -21,7 +21,6 @@ const navItems = [
 const NavBar = () => {
   const currPath = usePathname();
   const { status, data } = useSession();
-  console.log("🚀 ~ file: NavBar.tsx:24 ~ NavBar ~ data:", data);
   if (currPath == "/") {
     redirect("/dashboard");
   }

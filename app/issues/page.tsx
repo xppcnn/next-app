@@ -16,11 +16,11 @@ const Issues = async ({ searchParams }: Props) => {
   const status = statuses.includes(searchParams.status)
     ? searchParams.status
     : undefined;
-  const issues = await prisma.issue.findMany({
-    where: {
-      status,
-    },
-  });
+  // // const issues = await prisma.issue.findMany({
+  // //   where: {
+  // //     status,
+  // //   },
+  // // });
   return (
     <div>
       <div className="mb-3 flex justify-between">
@@ -28,7 +28,7 @@ const Issues = async ({ searchParams }: Props) => {
         <AddIssue />
       </div>
       <div>
-        <DataTable columns={columns} data={issues} />
+        <DataTable columns={columns} status={status} />
       </div>
     </div>
   );

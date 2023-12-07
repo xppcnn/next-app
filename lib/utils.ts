@@ -10,8 +10,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-
-
 export function DateFormat(time: Date, formatText = "yyyy-MM-dd HH:mm:ss") {
   return format(new Date(time), formatText, { locale: zhCN });
 }
