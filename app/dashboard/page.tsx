@@ -9,6 +9,8 @@ import {
   LatestIssuesLoading,
 } from "./loading";
 
+export const dynamic = "force-dynamic";
+
 const Dashboard = async () => {
   const openCount = await prisma.issue.count({
     where: {

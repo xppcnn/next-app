@@ -14,7 +14,7 @@ import {
 import prisma from "@/prisma/client";
 import Link from "next/link";
 import IssueStatusBadge from "../issues/IssueStatusBadge";
-export const dynamic = "force-dynamic";
+
 const LatestIssues = async () => {
   const issues = await prisma.issue.findMany({
     orderBy: {
