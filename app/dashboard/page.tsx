@@ -1,8 +1,13 @@
-import React from "react";
+import React, { Suspense } from "react";
 import LatestIssues from "./LatestIssues";
 import IssueSummary from "./IssueSummary";
 import Chart from "./Chart";
 import prisma from "@/prisma/client";
+import {
+  ChartLoading,
+  IssueSummaryLoading,
+  LatestIssuesLoading,
+} from "./loading";
 
 const Dashboard = async () => {
   const openCount = await prisma.issue.count({
@@ -23,19 +28,25 @@ const Dashboard = async () => {
   return (
     <div className="flex gap-x-5">
       <div className="flex-1 flex gap-y-5 flex-col">
-        <IssueSummary
-          open={openCount}
-          closed={closeCount}
-          inProgress={inProgressCount}
-        />
-        <Chart
-          open={openCount}
-          closed={closeCount}
-          inProgress={inProgressCount}
-        />
+        <Suspense fallback={<IssueSummaryLoading />}>
+          <IssueSummary
+            open={openCount}
+            closed={closeCount}
+            inProgress={inProgressCount}
+          />
+        </Suspense>
+        <Suspense fallback={<ChartLoading />}>
+          <Chart
+            open={openCount}
+            closed={closeCount}
+            inProgress={inProgressCount}
+          />
+        </Suspense>
       </div>
       <div className="flex-1">
-        <LatestIssues />
+        <Suspense fallback={<LatestIssuesLoading />}>
+          <LatestIssues />
+        </Suspense>
       </div>
     </div>
   );
