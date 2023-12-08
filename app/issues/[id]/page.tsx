@@ -11,6 +11,28 @@ import Link from "next/link";
 import DeleteIssueBtn from "./DeleteIssueBtn";
 import { auth } from "@/auth";
 import AssignUserSelect from "./AssignUserSelect";
+import { Metadata, ResolvingMetadata } from "next";
+
+export async function generateMetadata(
+  { params }: IDParams,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const id = params.id;
+
+  // fetch data
+  const detail = await prisma.issue.findUnique({
+    where: {
+      id: params.id,
+    },
+  });
+
+  return {
+    title: detail?.title,
+    description: detail?.description,
+  };
+}
+
 const IssueDetailPage = async ({ params }: IDParams) => {
   const session = await auth();
   const detail = await prisma.issue.findUnique({

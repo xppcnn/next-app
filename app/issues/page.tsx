@@ -4,6 +4,13 @@ import prisma from "@/prisma/client";
 import SelectIssue from "./SelectIssue";
 import { Status } from "@prisma/client";
 import { DataTable, columns } from "./Table";
+
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dashboard",
+};
+
 export const dynamic = "force-dynamic";
 
 interface Props {
