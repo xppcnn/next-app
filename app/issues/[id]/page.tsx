@@ -12,6 +12,15 @@ import DeleteIssueBtn from "./DeleteIssueBtn";
 import { auth } from "@/auth";
 import AssignUserSelect from "./AssignUserSelect";
 import { Metadata, ResolvingMetadata } from "next";
+import { cache } from "react";
+
+const getDetail = cache(async (id: string) =>
+  prisma.issue.findUnique({
+    where: {
+      id: id,
+    },
+  })
+);
 
 export async function generateMetadata(
   { params }: IDParams,
@@ -21,11 +30,7 @@ export async function generateMetadata(
   const id = params.id;
 
   // fetch data
-  const detail = await prisma.issue.findUnique({
-    where: {
-      id: params.id,
-    },
-  });
+  const detail = await getDetail(id);
 
   return {
     title: detail?.title,
@@ -35,11 +40,7 @@ export async function generateMetadata(
 
 const IssueDetailPage = async ({ params }: IDParams) => {
   const session = await auth();
-  const detail = await prisma.issue.findUnique({
-    where: {
-      id: params.id,
-    },
-  });
+  const detail = await getDetail(params.id);
   if (!detail) {
     return notFound();
   }
